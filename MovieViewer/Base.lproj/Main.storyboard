@@ -42,7 +42,6 @@
                                         <gestureRecognizers/>
                                         <connections>
                                             <outlet property="posterView" destination="wGb-tP-Qbf" id="PeU-gk-fZH"/>
-                                            <outletCollection property="gestureRecognizers" destination="Toz-Jr-hdz" appends="YES" id="kQR-pO-9Ij"/>
                                             <segue destination="BRa-kB-b77" kind="push" identifier="toInfoViewController" id="BIc-xt-1hb"/>
                                         </connections>
                                     </collectionViewCell>
@@ -57,7 +56,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Toz-Jr-hdz"/>
             </objects>
             <point key="canvasLocation" x="662" y="308"/>
         </scene>
@@ -69,24 +67,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="fzS-wg-ZIC">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="k9s-0F-tBu">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overview" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9aI-ve-w7S" userLabel="overviewLabel">
-                                <rect key="frame" x="20" y="83" width="280" height="465"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="fzS-wg-ZIC">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <view alpha="0.80000000000000004" contentMode="scaleToFill" id="gn3-37-SL6">
+                                        <rect key="frame" x="0.0" y="568" width="320" height="260"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B6m-qz-Ind">
+                                                <rect key="frame" x="8" y="8" width="304" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overview" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9aI-ve-w7S" userLabel="overviewLabel">
+                                                <rect key="frame" x="8" y="37" width="304" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.092040261580000005" blue="0.18419329509999999" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Overview" id="6pe-8C-lME"/>
                     <connections>
-                        <outlet property="overviewLabel" destination="9aI-ve-w7S" id="2E0-Ik-PBT"/>
+                        <outlet property="infoView" destination="gn3-37-SL6" id="GQy-BC-aCN"/>
+                        <outlet property="overviewLabel" destination="9aI-ve-w7S" id="gtl-bj-0hY"/>
                         <outlet property="posterBackgroundView" destination="fzS-wg-ZIC" id="ZTz-p4-Au6"/>
+                        <outlet property="scrollView" destination="k9s-0F-tBu" id="wjt-Pg-GLg"/>
+                        <outlet property="titleLabel" destination="B6m-qz-Ind" id="tUZ-K3-2lg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HRg-W9-9fU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -96,7 +117,7 @@
         <!--Navigation Controller-->
         <scene sceneID="DdT-nh-leC">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jZU-Bp-8py" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MoviesNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="jZU-Bp-8py" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6Td-Fs-aVe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

@@ -17,7 +17,8 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     // Variables
     var movies: [NSDictionary]?
-
+    var endpoint: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,7 +31,6 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         posterCollectionView.delegate = self
         
         loadDataFromNetwork()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,27 +42,12 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         if segue.identifier == "toInfoViewController" {
     
-            let selectedIndex = self.posterCollectionView.indexPathForCell(sender as! UICollectionViewCell)
-
+            let selectedIndex = posterCollectionView.indexPathForCell(sender as! UICollectionViewCell)
+            let movie = movies![selectedIndex!.row]
+            
             let itemToAdd = segue.destinationViewController as! MoviesInfoViewController
-            
-            let movieTitle = movies![selectedIndex!.row]["title"] as? String
-            let movieOverview = movies![selectedIndex!.row]["overview"] as? String
-            
-            itemToAdd.movieTitle = movieTitle
-            itemToAdd.movieOverview = movieOverview
-            
-            if let posterPath = movies![selectedIndex!.row]["poster_path"] as? String {
-                let posterBaseUrl = "http://image.tmdb.org/t/p/w500"
-                let posterUrl = NSURL(string: posterBaseUrl + posterPath)
-                itemToAdd.movieImageUrl = posterUrl
-            }
-            else {
-                itemToAdd.movieImageUrl = nil
-            }
-            
+            itemToAdd.movie = movie
         }
-    
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -73,14 +58,12 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         else {
             return 0
         }
-    
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = posterCollectionView.dequeueReusableCellWithReuseIdentifier("posterCell", forIndexPath: indexPath) as! posterCell
         
-        // Display data retrieved
         let movie = movies![indexPath.row]
         
         // Display the poster image, if there is one
@@ -92,7 +75,6 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         else {
             cell.posterView.image = nil
         }
-        
         return cell
     }
 
@@ -100,7 +82,7 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         // Create the NSURLRequest
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = NSURL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
+        let url = NSURL(string: "https://api.themoviedb.org/3/movie/\(endpoint)?api_key=\(apiKey)")
         let request = NSURLRequest(
             URL: url!,
             cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData,
@@ -132,7 +114,6 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
                             self.posterCollectionView.reloadData()
                     }
                 }
-
         });
         task.resume()
     }
@@ -142,6 +123,5 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         loadDataFromNetwork()
         
         refreshControl.endRefreshing()
-
     }
 }
