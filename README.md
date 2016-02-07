@@ -93,6 +93,7 @@ The following **additional** features are implemented:
 - [x] Customize the UI. (Added icons and posters have rounded edges, shadows, etc)
 - [x] A "No Results" error message is displayed when searching for nonexistent movies
 - [x] The info view automatically resizes to fit all text from a movie's overview
+- [x] Added a third tab for Upcoming movies
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
